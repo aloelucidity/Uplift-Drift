@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="WheelStats" load_steps=8 format=3 uid="uid://cpsx0l2hyr2c5"]
+[gd_resource type="Resource" script_class="WheelStats" format=3 uid="uid://cpsx0l2hyr2c5"]
 
 [ext_resource type="Script" uid="uid://q2lis1nq8r2d" path="res://car/wheels/wheel_stats.gd" id="1_cgvly"]
 [ext_resource type="Texture2D" uid="uid://d2qhgup7qrm2r" path="res://car/wheels/graphics/rubber.png" id="2_5wneq"]
@@ -27,7 +27,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_yxubf")
 }],
-"loop": true,
+"loop": 1,
 "name": &"default",
 "speed": 24.0
 }]

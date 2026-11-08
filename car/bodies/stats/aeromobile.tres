@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="BodyStats" load_steps=4 format=3 uid="uid://dye8pxivgrg5p"]
+[gd_resource type="Resource" script_class="BodyStats" format=3 uid="uid://dye8pxivgrg5p"]
 
 [ext_resource type="Script" uid="uid://bv7ygilbev78e" path="res://car/bodies/body_stats.gd" id="1_ercog"]
 [ext_resource type="Texture2D" uid="uid://cvucbmjg7uvh1" path="res://car/bodies/graphics/aeromobile.png" id="2_mokkr"]

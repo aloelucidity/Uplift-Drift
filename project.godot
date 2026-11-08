@@ -8,13 +8,15 @@
 
 config_version=5
 
+[animation]
+
+compatibility/default_parent_skeleton_in_mesh_instance_3d=true
+
 [application]
 
 config/name="Uplift Drift"
 run/main_scene="uid://41gs0at3fv0t"
-config/features=PackedStringArray("4.5", "GL Compatibility")
-boot_splash/bg_color=Color(0.078431375, 0.13333334, 0.2509804, 1)
-boot_splash/image="uid://dy0p8066sf3da"
+config/features=PackedStringArray("4.7", "GL Compatibility")
 config/icon="res://icon.svg"
 
 [audio]
@@ -403,8 +405,8 @@ common/physics_ticks_per_second=120
 
 [rendering]
 
-renderer/rendering_method="gl_compatibility"
-renderer/rendering_method.mobile="gl_compatibility"
+renderer/rendering_method="mobile"
+anti_aliasing/quality/msaa_2d=1
 
 [richer_text_label]
 

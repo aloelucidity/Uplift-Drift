@@ -1,4 +1,4 @@
-extends AutoResizer
+extends Control
 
 
 @export_file_path var intermission_path: String

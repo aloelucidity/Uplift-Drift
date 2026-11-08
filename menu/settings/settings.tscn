@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://bxk1oppwws7yo"]
+[gd_scene format=3 uid="uid://bxk1oppwws7yo"]
 
 [ext_resource type="Script" uid="uid://oem4xeu4v13q" path="res://menu/screen.gd" id="1_0i2s0"]
 [ext_resource type="Theme" uid="uid://bkavqyofikvxb" path="res://misc/theme.tres" id="1_5g0rr"]
@@ -12,11 +12,41 @@
 [ext_resource type="Script" uid="uid://cejhc031id4du" path="res://menu/settings/window_scale.gd" id="5_g5pvn"]
 [ext_resource type="Script" uid="uid://noqnufo31ga6" path="res://menu/settings/setting_toggle.gd" id="5_u7srk"]
 
+[sub_resource type="Animation" id="Animation_ei1i3"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("BG:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0, 0, 0, 1)]
+}
+
 [sub_resource type="Animation" id="Animation_1wh5u"]
 resource_name = "transition"
+length = 0.5
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("BG:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 0.5019608), Color(0, 0, 0, 1)]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_5g0rr"]
 _data = {
+&"RESET": SubResource("Animation_ei1i3"),
 &"transition": SubResource("Animation_1wh5u")
 }
 
@@ -34,7 +64,7 @@ _data = {
 
 [sub_resource type="ButtonGroup" id="ButtonGroup_tcj1p"]
 
-[node name="Settings" type="Control"]
+[node name="Settings" type="Control" unique_id=228939873]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -45,18 +75,25 @@ theme = ExtResource("1_5g0rr")
 script = ExtResource("1_0i2s0")
 metadata/_custom_type_script = "uid://oem4xeu4v13q"
 
-[node name="ButtonFunctions" type="Control" parent="."]
+[node name="ButtonFunctions" type="Control" parent="." unique_id=989509148]
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 script = ExtResource("3_ei1i3")
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-libraries = {
-&"": SubResource("AnimationLibrary_5g0rr")
-}
+[node name="BG" type="ColorRect" parent="." unique_id=1826888167]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
 
-[node name="CenterContainer" type="CenterContainer" parent="."]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1727222351]
+libraries/ = SubResource("AnimationLibrary_5g0rr")
+
+[node name="CenterContainer" type="CenterContainer" parent="." unique_id=603104328]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -64,27 +101,27 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="PanelContainer" type="PanelContainer" parent="CenterContainer"]
+[node name="PanelContainer" type="PanelContainer" parent="CenterContainer" unique_id=72504915]
 layout_mode = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer/PanelContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer/PanelContainer" unique_id=1623734129]
 layout_mode = 2
 
-[node name="Back" type="HBoxContainer" parent="CenterContainer/PanelContainer/VBoxContainer"]
+[node name="Back" type="HBoxContainer" parent="CenterContainer/PanelContainer/VBoxContainer" unique_id=980262398]
 layout_mode = 2
 alignment = 1
 
-[node name="TabButtons" type="HBoxContainer" parent="CenterContainer/PanelContainer/VBoxContainer"]
+[node name="TabButtons" type="HBoxContainer" parent="CenterContainer/PanelContainer/VBoxContainer" unique_id=237508214]
 layout_mode = 2
 theme_override_constants/separation = 8
 alignment = 1
 
-[node name="Back" type="Button" parent="CenterContainer/PanelContainer/VBoxContainer/TabButtons"]
+[node name="Back" type="Button" parent="CenterContainer/PanelContainer/VBoxContainer/TabButtons" unique_id=1473318295]
 layout_mode = 2
 focus_mode = 0
 text = "go back"
 
-[node name="General" type="Button" parent="CenterContainer/PanelContainer/VBoxContainer/TabButtons"]
+[node name="General" type="Button" parent="CenterContainer/PanelContainer/VBoxContainer/TabButtons" unique_id=142959369]
 layout_mode = 2
 focus_mode = 0
 toggle_mode = true
@@ -92,14 +129,14 @@ button_pressed = true
 button_group = SubResource("ButtonGroup_2rb37")
 text = "general"
 
-[node name="Controls" type="Button" parent="CenterContainer/PanelContainer/VBoxContainer/TabButtons"]
+[node name="Controls" type="Button" parent="CenterContainer/PanelContainer/VBoxContainer/TabButtons" unique_id=1369008222]
 layout_mode = 2
 focus_mode = 0
 toggle_mode = true
 button_group = SubResource("ButtonGroup_2rb37")
 text = "controls"
 
-[node name="OptionsTabs" type="MarginContainer" parent="CenterContainer/PanelContainer/VBoxContainer" node_paths=PackedStringArray("current_tab")]
+[node name="OptionsTabs" type="MarginContainer" parent="CenterContainer/PanelContainer/VBoxContainer" unique_id=1653295292 node_paths=PackedStringArray("current_tab")]
 layout_mode = 2
 theme_override_constants/margin_left = 12
 theme_override_constants/margin_top = 4
@@ -108,62 +145,60 @@ theme_override_constants/margin_bottom = 12
 script = ExtResource("3_sa1dq")
 current_tab = NodePath("General")
 
-[node name="General" type="CenterContainer" parent="CenterContainer/PanelContainer/VBoxContainer/OptionsTabs"]
+[node name="General" type="CenterContainer" parent="CenterContainer/PanelContainer/VBoxContainer/OptionsTabs" unique_id=1949146202]
 layout_mode = 2
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="CenterContainer/PanelContainer/VBoxContainer/OptionsTabs/General"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="CenterContainer/PanelContainer/VBoxContainer/OptionsTabs/General" unique_id=281501413]
 root_node = NodePath("../../Controls")
-libraries = {
-&"": SubResource("AnimationLibrary_u7srk")
-}
+libraries/ = SubResource("AnimationLibrary_u7srk")
 
-[node name="GridContainer" type="GridContainer" parent="CenterContainer/PanelContainer/VBoxContainer/OptionsTabs/General"]
+[node name="GridContainer" type="GridContainer" parent="CenterContainer/PanelContainer/VBoxContainer/OptionsTabs/General" unique_id=370287886]
 layout_mode = 2
 theme_override_constants/h_separation = 6
 theme_override_constants/v_separation = 6
 columns = 3
 
-[node name="AudioSettings" type="VBoxContainer" parent="CenterContainer/PanelContainer/VBoxContainer/OptionsTabs/General/GridContainer"]
+[node name="AudioSettings" type="VBoxContainer" parent="CenterContainer/PanelContainer/VBoxContainer/OptionsTabs/General/GridContainer" unique_id=1056014982]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 theme_override_constants/separation = 12
 
-[node name="Label" type="Label" parent="CenterContainer/PanelContainer/VBoxContainer/OptionsTabs/General/GridContainer/AudioSettings"]
+[node name="Label" type="Label" parent="CenterContainer/PanelContainer/VBoxContainer/OptionsTabs/General/GridContainer/AudioSettings" unique_id=2001707651]
 layout_mode = 2
 text = "audio settings"
 horizontal_alignment = 1
 
-[node name="MasterVolume" parent="CenterContainer/PanelContainer/VBoxContainer/OptionsTabs/General/GridContainer/AudioSettings" instance=ExtResource("3_n2qh0")]
+[node name="MasterVolume" parent="CenterContainer/PanelContainer/VBoxContainer/OptionsTabs/General/GridContainer/AudioSettings" unique_id=997220733 instance=ExtResource("3_n2qh0")]
 layout_mode = 2
 label_text = "master volume -"
 setting_name = &"master_volume"
 
-[node name="MusicVolume" parent="CenterContainer/PanelContainer/VBoxContainer/OptionsTabs/General/GridContainer/AudioSettings" instance=ExtResource("3_n2qh0")]
+[node name="MusicVolume" parent="CenterContainer/PanelContainer/VBoxContainer/OptionsTabs/General/GridContainer/AudioSettings" unique_id=743773112 instance=ExtResource("3_n2qh0")]
 layout_mode = 2
 label_text = "music volume -"
 setting_name = &"music_volume"
 
-[node name="SFXVolume" parent="CenterContainer/PanelContainer/VBoxContainer/OptionsTabs/General/GridContainer/AudioSettings" instance=ExtResource("3_n2qh0")]
+[node name="SFXVolume" parent="CenterContainer/PanelContainer/VBoxContainer/OptionsTabs/General/GridContainer/AudioSettings" unique_id=397320361 instance=ExtResource("3_n2qh0")]
 layout_mode = 2
 label_text = "sfx volume -"
 setting_name = &"sfx_volume"
 
-[node name="VSeparator" type="VSeparator" parent="CenterContainer/PanelContainer/VBoxContainer/OptionsTabs/General/GridContainer"]
+[node name="VSeparator" type="VSeparator" parent="CenterContainer/PanelContainer/VBoxContainer/OptionsTabs/General/GridContainer" unique_id=2072211100]
 layout_mode = 2
 
-[node name="DisplaySettings" type="VBoxContainer" parent="CenterContainer/PanelContainer/VBoxContainer/OptionsTabs/General/GridContainer"]
+[node name="DisplaySettings" type="VBoxContainer" parent="CenterContainer/PanelContainer/VBoxContainer/OptionsTabs/General/GridContainer" unique_id=89533265]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 theme_override_constants/separation = 8
 
-[node name="Label" type="Label" parent="CenterContainer/PanelContainer/VBoxContainer/OptionsTabs/General/GridContainer/DisplaySettings"]
+[node name="Label" type="Label" parent="CenterContainer/PanelContainer/VBoxContainer/OptionsTabs/General/GridContainer/DisplaySettings" unique_id=1949840890]
 layout_mode = 2
 text = "display settings"
 horizontal_alignment = 1
 
-[node name="WindowScale" type="OptionButton" parent="CenterContainer/PanelContainer/VBoxContainer/OptionsTabs/General/GridContainer/DisplaySettings"]
+[node name="WindowScale" type="OptionButton" parent="CenterContainer/PanelContainer/VBoxContainer/OptionsTabs/General/GridContainer/DisplaySettings" unique_id=111945096]
 layout_mode = 2
 focus_mode = 0
 script = ExtResource("5_g5pvn")
@@ -171,7 +206,7 @@ section = "Display Settings"
 key = "window_scale"
 options = Array[String](["fullscreen"])
 
-[node name="FPSLimit" type="OptionButton" parent="CenterContainer/PanelContainer/VBoxContainer/OptionsTabs/General/GridContainer/DisplaySettings"]
+[node name="FPSLimit" type="OptionButton" parent="CenterContainer/PanelContainer/VBoxContainer/OptionsTabs/General/GridContainer/DisplaySettings" unique_id=344109457]
 layout_mode = 2
 focus_mode = 0
 script = ExtResource("5_1usl5")
@@ -179,7 +214,7 @@ section = "Display Settings"
 key = "fps_limit"
 options = Array[String](["uncapped", "30 fps", "60 fps", "90 fps", "120 fps"])
 
-[node name="VSync" type="CheckButton" parent="CenterContainer/PanelContainer/VBoxContainer/OptionsTabs/General/GridContainer/DisplaySettings"]
+[node name="VSync" type="CheckButton" parent="CenterContainer/PanelContainer/VBoxContainer/OptionsTabs/General/GridContainer/DisplaySettings" unique_id=1516610624]
 layout_mode = 2
 focus_mode = 0
 button_pressed = true
@@ -188,71 +223,71 @@ script = ExtResource("5_u7srk")
 section = "Display Settings"
 key = "vsync"
 
-[node name="HSeparator" type="HSeparator" parent="CenterContainer/PanelContainer/VBoxContainer/OptionsTabs/General/GridContainer"]
+[node name="HSeparator" type="HSeparator" parent="CenterContainer/PanelContainer/VBoxContainer/OptionsTabs/General/GridContainer" unique_id=818279625]
 layout_mode = 2
 
-[node name="Control" type="Control" parent="CenterContainer/PanelContainer/VBoxContainer/OptionsTabs/General/GridContainer"]
+[node name="Control" type="Control" parent="CenterContainer/PanelContainer/VBoxContainer/OptionsTabs/General/GridContainer" unique_id=170267021]
 layout_mode = 2
 
-[node name="HSeparator2" type="HSeparator" parent="CenterContainer/PanelContainer/VBoxContainer/OptionsTabs/General/GridContainer"]
+[node name="HSeparator2" type="HSeparator" parent="CenterContainer/PanelContainer/VBoxContainer/OptionsTabs/General/GridContainer" unique_id=1968901989]
 layout_mode = 2
 
-[node name="SaveSettings" type="VBoxContainer" parent="CenterContainer/PanelContainer/VBoxContainer/OptionsTabs/General/GridContainer"]
+[node name="SaveSettings" type="VBoxContainer" parent="CenterContainer/PanelContainer/VBoxContainer/OptionsTabs/General/GridContainer" unique_id=1751517964]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 theme_override_constants/separation = 12
 
-[node name="Label" type="Label" parent="CenterContainer/PanelContainer/VBoxContainer/OptionsTabs/General/GridContainer/SaveSettings"]
+[node name="Label" type="Label" parent="CenterContainer/PanelContainer/VBoxContainer/OptionsTabs/General/GridContainer/SaveSettings" unique_id=2062010184]
 layout_mode = 2
 text = "manage save data"
 horizontal_alignment = 1
 
-[node name="HBoxContainer" type="HBoxContainer" parent="CenterContainer/PanelContainer/VBoxContainer/OptionsTabs/General/GridContainer/SaveSettings"]
+[node name="HBoxContainer" type="HBoxContainer" parent="CenterContainer/PanelContainer/VBoxContainer/OptionsTabs/General/GridContainer/SaveSettings" unique_id=565428527]
 layout_mode = 2
 size_flags_vertical = 6
 theme_override_constants/separation = 24
 alignment = 1
 
-[node name="PanelContainer" type="PanelContainer" parent="CenterContainer/PanelContainer/VBoxContainer/OptionsTabs/General/GridContainer/SaveSettings/HBoxContainer"]
+[node name="PanelContainer" type="PanelContainer" parent="CenterContainer/PanelContainer/VBoxContainer/OptionsTabs/General/GridContainer/SaveSettings/HBoxContainer" unique_id=413457613]
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxEmpty_ehx68")
 
-[node name="OpenFolder" parent="CenterContainer/PanelContainer/VBoxContainer/OptionsTabs/General/GridContainer/SaveSettings/HBoxContainer/PanelContainer" instance=ExtResource("5_ehx68")]
+[node name="OpenFolder" parent="CenterContainer/PanelContainer/VBoxContainer/OptionsTabs/General/GridContainer/SaveSettings/HBoxContainer/PanelContainer" unique_id=1145950600 instance=ExtResource("5_ehx68")]
 custom_minimum_size = Vector2(96, 32)
 layout_mode = 2
 label_text = "Open Folder"
 
-[node name="PanelContainer2" type="PanelContainer" parent="CenterContainer/PanelContainer/VBoxContainer/OptionsTabs/General/GridContainer/SaveSettings/HBoxContainer"]
+[node name="PanelContainer2" type="PanelContainer" parent="CenterContainer/PanelContainer/VBoxContainer/OptionsTabs/General/GridContainer/SaveSettings/HBoxContainer" unique_id=913999570]
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxEmpty_ehx68")
 
-[node name="DeleteSave" parent="CenterContainer/PanelContainer/VBoxContainer/OptionsTabs/General/GridContainer/SaveSettings/HBoxContainer/PanelContainer2" instance=ExtResource("5_ehx68")]
+[node name="DeleteSave" parent="CenterContainer/PanelContainer/VBoxContainer/OptionsTabs/General/GridContainer/SaveSettings/HBoxContainer/PanelContainer2" unique_id=2011213714 instance=ExtResource("5_ehx68")]
 custom_minimum_size = Vector2(96, 32)
 layout_mode = 2
 label_text = "Delete Save"
 
-[node name="VSeparator2" type="VSeparator" parent="CenterContainer/PanelContainer/VBoxContainer/OptionsTabs/General/GridContainer"]
+[node name="VSeparator2" type="VSeparator" parent="CenterContainer/PanelContainer/VBoxContainer/OptionsTabs/General/GridContainer" unique_id=1358074750]
 layout_mode = 2
 
-[node name="AccessibilitySettings" type="VBoxContainer" parent="CenterContainer/PanelContainer/VBoxContainer/OptionsTabs/General/GridContainer"]
+[node name="AccessibilitySettings" type="VBoxContainer" parent="CenterContainer/PanelContainer/VBoxContainer/OptionsTabs/General/GridContainer" unique_id=552373636]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 theme_override_constants/separation = 0
 
-[node name="Label" type="Label" parent="CenterContainer/PanelContainer/VBoxContainer/OptionsTabs/General/GridContainer/AccessibilitySettings"]
+[node name="Label" type="Label" parent="CenterContainer/PanelContainer/VBoxContainer/OptionsTabs/General/GridContainer/AccessibilitySettings" unique_id=513052643]
 layout_mode = 2
 text = "accessibility settings"
 horizontal_alignment = 1
 
-[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer/PanelContainer/VBoxContainer/OptionsTabs/General/GridContainer/AccessibilitySettings"]
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer/PanelContainer/VBoxContainer/OptionsTabs/General/GridContainer/AccessibilitySettings" unique_id=478905187]
 custom_minimum_size = Vector2(128, 0)
 layout_mode = 2
 size_flags_horizontal = 4
 theme_override_constants/separation = 0
 
-[node name="Screenshake" type="CheckButton" parent="CenterContainer/PanelContainer/VBoxContainer/OptionsTabs/General/GridContainer/AccessibilitySettings/VBoxContainer"]
+[node name="Screenshake" type="CheckButton" parent="CenterContainer/PanelContainer/VBoxContainer/OptionsTabs/General/GridContainer/AccessibilitySettings/VBoxContainer" unique_id=2081742966]
 layout_mode = 2
 focus_mode = 0
 button_pressed = true
@@ -261,7 +296,7 @@ script = ExtResource("5_u7srk")
 section = "Accessibility Settings"
 key = "screenshake"
 
-[node name="ZoomEffects" type="CheckButton" parent="CenterContainer/PanelContainer/VBoxContainer/OptionsTabs/General/GridContainer/AccessibilitySettings/VBoxContainer"]
+[node name="ZoomEffects" type="CheckButton" parent="CenterContainer/PanelContainer/VBoxContainer/OptionsTabs/General/GridContainer/AccessibilitySettings/VBoxContainer" unique_id=712952651]
 layout_mode = 2
 focus_mode = 0
 button_pressed = true
@@ -270,7 +305,7 @@ script = ExtResource("5_u7srk")
 section = "Accessibility Settings"
 key = "zoom_effects"
 
-[node name="HitStatic" type="CheckButton" parent="CenterContainer/PanelContainer/VBoxContainer/OptionsTabs/General/GridContainer/AccessibilitySettings/VBoxContainer"]
+[node name="HitStatic" type="CheckButton" parent="CenterContainer/PanelContainer/VBoxContainer/OptionsTabs/General/GridContainer/AccessibilitySettings/VBoxContainer" unique_id=613747879]
 layout_mode = 2
 focus_mode = 0
 button_pressed = true
@@ -279,129 +314,127 @@ script = ExtResource("5_u7srk")
 section = "Accessibility Settings"
 key = "hit_static"
 
-[node name="Controls" type="CenterContainer" parent="CenterContainer/PanelContainer/VBoxContainer/OptionsTabs"]
+[node name="Controls" type="CenterContainer" parent="CenterContainer/PanelContainer/VBoxContainer/OptionsTabs" unique_id=2133113677]
 visible = false
 layout_mode = 2
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="CenterContainer/PanelContainer/VBoxContainer/OptionsTabs/Controls"]
-libraries = {
-&"": SubResource("AnimationLibrary_u7srk")
-}
+[node name="AnimationPlayer" type="AnimationPlayer" parent="CenterContainer/PanelContainer/VBoxContainer/OptionsTabs/Controls" unique_id=2044253091]
+libraries/ = SubResource("AnimationLibrary_u7srk")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer/PanelContainer/VBoxContainer/OptionsTabs/Controls"]
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer/PanelContainer/VBoxContainer/OptionsTabs/Controls" unique_id=139255665]
 layout_mode = 2
 theme_override_constants/separation = 12
 
-[node name="Label" type="Label" parent="CenterContainer/PanelContainer/VBoxContainer/OptionsTabs/Controls/VBoxContainer"]
+[node name="Label" type="Label" parent="CenterContainer/PanelContainer/VBoxContainer/OptionsTabs/Controls/VBoxContainer" unique_id=122172765]
 layout_mode = 2
 text = "hold accept to clear bindings for an action"
 horizontal_alignment = 1
 
-[node name="ControlsHolder" type="HBoxContainer" parent="CenterContainer/PanelContainer/VBoxContainer/OptionsTabs/Controls/VBoxContainer"]
+[node name="ControlsHolder" type="HBoxContainer" parent="CenterContainer/PanelContainer/VBoxContainer/OptionsTabs/Controls/VBoxContainer" unique_id=819683774]
 layout_mode = 2
 theme_override_constants/separation = 12
 script = ExtResource("4_2rb37")
 
-[node name="Gameplay" type="VBoxContainer" parent="CenterContainer/PanelContainer/VBoxContainer/OptionsTabs/Controls/VBoxContainer/ControlsHolder"]
+[node name="Gameplay" type="VBoxContainer" parent="CenterContainer/PanelContainer/VBoxContainer/OptionsTabs/Controls/VBoxContainer/ControlsHolder" unique_id=1499692651]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="CenterContainer/PanelContainer/VBoxContainer/OptionsTabs/Controls/VBoxContainer/ControlsHolder/Gameplay"]
+[node name="Label" type="Label" parent="CenterContainer/PanelContainer/VBoxContainer/OptionsTabs/Controls/VBoxContainer/ControlsHolder/Gameplay" unique_id=1744080301]
 layout_mode = 2
 text = "gameplay controls"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="HSeparator" type="HSeparator" parent="CenterContainer/PanelContainer/VBoxContainer/OptionsTabs/Controls/VBoxContainer/ControlsHolder/Gameplay"]
+[node name="HSeparator" type="HSeparator" parent="CenterContainer/PanelContainer/VBoxContainer/OptionsTabs/Controls/VBoxContainer/ControlsHolder/Gameplay" unique_id=142148287]
 layout_mode = 2
 
-[node name="BoxContainer" type="GridContainer" parent="CenterContainer/PanelContainer/VBoxContainer/OptionsTabs/Controls/VBoxContainer/ControlsHolder/Gameplay"]
+[node name="BoxContainer" type="GridContainer" parent="CenterContainer/PanelContainer/VBoxContainer/OptionsTabs/Controls/VBoxContainer/ControlsHolder/Gameplay" unique_id=1521014042]
 layout_mode = 2
 theme_override_constants/h_separation = 12
 theme_override_constants/v_separation = 12
 columns = 2
 
-[node name="Reverse" parent="CenterContainer/PanelContainer/VBoxContainer/OptionsTabs/Controls/VBoxContainer/ControlsHolder/Gameplay/BoxContainer" instance=ExtResource("4_tcj1p")]
+[node name="Reverse" parent="CenterContainer/PanelContainer/VBoxContainer/OptionsTabs/Controls/VBoxContainer/ControlsHolder/Gameplay/BoxContainer" unique_id=329797381 instance=ExtResource("4_tcj1p")]
 layout_mode = 2
 action_name = "move_left"
 label_text = "reverse"
 
-[node name="Drive" parent="CenterContainer/PanelContainer/VBoxContainer/OptionsTabs/Controls/VBoxContainer/ControlsHolder/Gameplay/BoxContainer" instance=ExtResource("4_tcj1p")]
+[node name="Drive" parent="CenterContainer/PanelContainer/VBoxContainer/OptionsTabs/Controls/VBoxContainer/ControlsHolder/Gameplay/BoxContainer" unique_id=851206618 instance=ExtResource("4_tcj1p")]
 layout_mode = 2
 action_name = "move_right"
 label_text = "drive"
 
-[node name="Fall" parent="CenterContainer/PanelContainer/VBoxContainer/OptionsTabs/Controls/VBoxContainer/ControlsHolder/Gameplay/BoxContainer" instance=ExtResource("4_tcj1p")]
+[node name="Fall" parent="CenterContainer/PanelContainer/VBoxContainer/OptionsTabs/Controls/VBoxContainer/ControlsHolder/Gameplay/BoxContainer" unique_id=1127799244 instance=ExtResource("4_tcj1p")]
 layout_mode = 2
 action_name = "move_down"
 label_text = "fall"
 
-[node name="Jump" parent="CenterContainer/PanelContainer/VBoxContainer/OptionsTabs/Controls/VBoxContainer/ControlsHolder/Gameplay/BoxContainer" instance=ExtResource("4_tcj1p")]
+[node name="Jump" parent="CenterContainer/PanelContainer/VBoxContainer/OptionsTabs/Controls/VBoxContainer/ControlsHolder/Gameplay/BoxContainer" unique_id=1797873164 instance=ExtResource("4_tcj1p")]
 layout_mode = 2
 action_name = "move_up"
 label_text = "jump/hover"
 
-[node name="VSeparator" type="VSeparator" parent="CenterContainer/PanelContainer/VBoxContainer/OptionsTabs/Controls/VBoxContainer/ControlsHolder"]
+[node name="VSeparator" type="VSeparator" parent="CenterContainer/PanelContainer/VBoxContainer/OptionsTabs/Controls/VBoxContainer/ControlsHolder" unique_id=1861255892]
 layout_mode = 2
 
-[node name="UI" type="VBoxContainer" parent="CenterContainer/PanelContainer/VBoxContainer/OptionsTabs/Controls/VBoxContainer/ControlsHolder"]
+[node name="UI" type="VBoxContainer" parent="CenterContainer/PanelContainer/VBoxContainer/OptionsTabs/Controls/VBoxContainer/ControlsHolder" unique_id=775353985]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="CenterContainer/PanelContainer/VBoxContainer/OptionsTabs/Controls/VBoxContainer/ControlsHolder/UI"]
+[node name="Label" type="Label" parent="CenterContainer/PanelContainer/VBoxContainer/OptionsTabs/Controls/VBoxContainer/ControlsHolder/UI" unique_id=2136715932]
 layout_mode = 2
 text = "ui controls"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="HSeparator" type="HSeparator" parent="CenterContainer/PanelContainer/VBoxContainer/OptionsTabs/Controls/VBoxContainer/ControlsHolder/UI"]
+[node name="HSeparator" type="HSeparator" parent="CenterContainer/PanelContainer/VBoxContainer/OptionsTabs/Controls/VBoxContainer/ControlsHolder/UI" unique_id=1037824575]
 layout_mode = 2
 
-[node name="BoxContainer" type="GridContainer" parent="CenterContainer/PanelContainer/VBoxContainer/OptionsTabs/Controls/VBoxContainer/ControlsHolder/UI"]
+[node name="BoxContainer" type="GridContainer" parent="CenterContainer/PanelContainer/VBoxContainer/OptionsTabs/Controls/VBoxContainer/ControlsHolder/UI" unique_id=998250813]
 layout_mode = 2
 theme_override_constants/h_separation = 12
 theme_override_constants/v_separation = 12
 columns = 4
 
-[node name="Up" parent="CenterContainer/PanelContainer/VBoxContainer/OptionsTabs/Controls/VBoxContainer/ControlsHolder/UI/BoxContainer" instance=ExtResource("4_tcj1p")]
+[node name="Up" parent="CenterContainer/PanelContainer/VBoxContainer/OptionsTabs/Controls/VBoxContainer/ControlsHolder/UI/BoxContainer" unique_id=596872677 instance=ExtResource("4_tcj1p")]
 layout_mode = 2
 action_name = "ui_up"
 label_text = "up"
 
-[node name="Left" parent="CenterContainer/PanelContainer/VBoxContainer/OptionsTabs/Controls/VBoxContainer/ControlsHolder/UI/BoxContainer" instance=ExtResource("4_tcj1p")]
+[node name="Left" parent="CenterContainer/PanelContainer/VBoxContainer/OptionsTabs/Controls/VBoxContainer/ControlsHolder/UI/BoxContainer" unique_id=1971233082 instance=ExtResource("4_tcj1p")]
 layout_mode = 2
 action_name = "ui_left"
 label_text = "left"
 
-[node name="Down" parent="CenterContainer/PanelContainer/VBoxContainer/OptionsTabs/Controls/VBoxContainer/ControlsHolder/UI/BoxContainer" instance=ExtResource("4_tcj1p")]
+[node name="Down" parent="CenterContainer/PanelContainer/VBoxContainer/OptionsTabs/Controls/VBoxContainer/ControlsHolder/UI/BoxContainer" unique_id=2111061790 instance=ExtResource("4_tcj1p")]
 layout_mode = 2
 action_name = "ui_down"
 label_text = "down"
 
-[node name="Right" parent="CenterContainer/PanelContainer/VBoxContainer/OptionsTabs/Controls/VBoxContainer/ControlsHolder/UI/BoxContainer" instance=ExtResource("4_tcj1p")]
+[node name="Right" parent="CenterContainer/PanelContainer/VBoxContainer/OptionsTabs/Controls/VBoxContainer/ControlsHolder/UI/BoxContainer" unique_id=2133752550 instance=ExtResource("4_tcj1p")]
 layout_mode = 2
 action_name = "ui_right"
 label_text = "right"
 
-[node name="Accept" parent="CenterContainer/PanelContainer/VBoxContainer/OptionsTabs/Controls/VBoxContainer/ControlsHolder/UI/BoxContainer" instance=ExtResource("4_tcj1p")]
+[node name="Accept" parent="CenterContainer/PanelContainer/VBoxContainer/OptionsTabs/Controls/VBoxContainer/ControlsHolder/UI/BoxContainer" unique_id=1641855984 instance=ExtResource("4_tcj1p")]
 layout_mode = 2
 action_name = "ui_accept"
 label_text = "accept"
 
-[node name="Back" parent="CenterContainer/PanelContainer/VBoxContainer/OptionsTabs/Controls/VBoxContainer/ControlsHolder/UI/BoxContainer" instance=ExtResource("4_tcj1p")]
+[node name="Back" parent="CenterContainer/PanelContainer/VBoxContainer/OptionsTabs/Controls/VBoxContainer/ControlsHolder/UI/BoxContainer" unique_id=568283407 instance=ExtResource("4_tcj1p")]
 layout_mode = 2
 action_name = "ui_cancel"
 label_text = "back"
 
-[node name="Pause" parent="CenterContainer/PanelContainer/VBoxContainer/OptionsTabs/Controls/VBoxContainer/ControlsHolder/UI/BoxContainer" instance=ExtResource("4_tcj1p")]
+[node name="Pause" parent="CenterContainer/PanelContainer/VBoxContainer/OptionsTabs/Controls/VBoxContainer/ControlsHolder/UI/BoxContainer" unique_id=1073231084 instance=ExtResource("4_tcj1p")]
 layout_mode = 2
 action_name = "pause"
 label_text = "pause"
 
-[node name="ControlTabs" type="HBoxContainer" parent="CenterContainer/PanelContainer/VBoxContainer/OptionsTabs/Controls/VBoxContainer"]
+[node name="ControlTabs" type="HBoxContainer" parent="CenterContainer/PanelContainer/VBoxContainer/OptionsTabs/Controls/VBoxContainer" unique_id=1413763671]
 layout_mode = 2
 theme_override_constants/separation = 8
 alignment = 1
 
-[node name="Keyboard" type="Button" parent="CenterContainer/PanelContainer/VBoxContainer/OptionsTabs/Controls/VBoxContainer/ControlTabs"]
+[node name="Keyboard" type="Button" parent="CenterContainer/PanelContainer/VBoxContainer/OptionsTabs/Controls/VBoxContainer/ControlTabs" unique_id=1449114885]
 layout_mode = 2
 focus_mode = 0
 toggle_mode = true
@@ -409,7 +442,7 @@ button_pressed = true
 button_group = SubResource("ButtonGroup_tcj1p")
 text = "keyboard"
 
-[node name="Controller" type="Button" parent="CenterContainer/PanelContainer/VBoxContainer/OptionsTabs/Controls/VBoxContainer/ControlTabs"]
+[node name="Controller" type="Button" parent="CenterContainer/PanelContainer/VBoxContainer/OptionsTabs/Controls/VBoxContainer/ControlTabs" unique_id=1174119590]
 layout_mode = 2
 focus_mode = 0
 toggle_mode = true

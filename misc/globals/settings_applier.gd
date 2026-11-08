@@ -26,7 +26,6 @@ func setting_changed(key: String, new_value: Variant) -> void:
 				)
 				window.mode = Window.MODE_WINDOWED
 				window.size = base_size * window_scale
-				window.position = screen_size / 2 - window.size / 2
 			setting_changed("vsync", LocalSettings.load_setting("Display Settings", "vsync", true))
 		
 		"fps_limit":

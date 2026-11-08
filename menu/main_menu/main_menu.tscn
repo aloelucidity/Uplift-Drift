@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://dlftt0fxvvmkk"]
+[gd_scene format=3 uid="uid://dlftt0fxvvmkk"]
 
 [ext_resource type="Script" uid="uid://oem4xeu4v13q" path="res://menu/screen.gd" id="1_q6idt"]
 [ext_resource type="PackedScene" uid="uid://8gdwiai7i0gj" path="res://menu/button.tscn" id="2_e5xhn"]
@@ -6,6 +6,28 @@
 [ext_resource type="FontFile" uid="uid://cq4nckdgrjf3o" path="res://misc/fonts/Shrikhand-Regular.ttf" id="3_qs6vt"]
 [ext_resource type="Shader" uid="uid://cw0wphwhg5eqg" path="res://misc/shaders/bevel.gdshader" id="4_7r8i1"]
 [ext_resource type="Script" uid="uid://binf0xss8mnvi" path="res://menu/main_menu/logo.gd" id="5_winya"]
+
+[sub_resource type="Gradient" id="Gradient_dn5jd"]
+offsets = PackedFloat32Array(0, 0.6, 1)
+colors = PackedColorArray(0, 0, 0, 1, 0, 0, 0, 0.9, 0, 0, 0, 0)
+metadata/_snap_enabled = true
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_teedc"]
+gradient = SubResource("Gradient_dn5jd")
+fill_from = Vector2(0, 1)
+fill_to = Vector2(0, 0.7)
+metadata/_snap_enabled = true
+
+[sub_resource type="GDScript" id="GDScript_prid6"]
+script/source = "extends SubViewport
+
+
+# Called when the node enters the scene tree for the first time.
+func _ready() -> void:
+	for i in range(10):
+		await get_tree().process_frame
+	get_texture().get_image().save_png(\"res://logo.png\")
+"
 
 [sub_resource type="Theme" id="Theme_7r8i1"]
 default_font = ExtResource("3_qs6vt")
@@ -44,7 +66,7 @@ length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("MarginContainer/Buttons/HBoxContainer:scale")
+tracks/0/path = NodePath("MarginContainer/Buttons:scale")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -68,84 +90,60 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("MarginContainer/CenterContainer/Control/Logo:anchor_bottom")
+tracks/2/path = NodePath("MarginContainer/Buttons:offset_bottom")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [1.0]
+"values": [32.0]
 }
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("MarginContainer/CenterContainer/Control/Logo:anchor_top")
+tracks/3/path = NodePath("Logo/Node2D/Logo:modulate")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [0.0]
+"values": [Color(1, 1, 1, 1)]
 }
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("MarginContainer/CenterContainer/Control/Logo:offset_bottom")
+tracks/4/path = NodePath("Gradient:texture:fill_to")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [0.0]
+"values": [Vector2(0, 0.7)]
 }
 tracks/5/type = "value"
 tracks/5/imported = false
 tracks/5/enabled = true
-tracks/5/path = NodePath("MarginContainer/Buttons/HBoxContainer:offset_bottom")
+tracks/5/path = NodePath("MarginContainer/CenterContainer/Control/Logo:offset_transform_position_ratio")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [32.0]
-}
-tracks/6/type = "value"
-tracks/6/imported = false
-tracks/6/enabled = true
-tracks/6/path = NodePath("MarginContainer/Buttons/HBoxContainer:offset_top")
-tracks/6/interp = 1
-tracks/6/loop_wrap = true
-tracks/6/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [0.0]
-}
-tracks/7/type = "value"
-tracks/7/imported = false
-tracks/7/enabled = true
-tracks/7/path = NodePath("Logo/Node2D/Logo:modulate")
-tracks/7/interp = 1
-tracks/7/loop_wrap = true
-tracks/7/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Color(1, 1, 1, 1)]
+"values": [Vector2(0, 0)]
 }
 
 [sub_resource type="Animation" id="Animation_q6idt"]
 resource_name = "transition"
 length = 0.5
-step = 0.05
+step = 0.1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("MarginContainer/Buttons/HBoxContainer:scale")
+tracks/0/path = NodePath("MarginContainer/Buttons:offset_transform_scale")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -157,7 +155,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("MarginContainer/CenterContainer/Control/Logo:scale")
+tracks/1/path = NodePath("MarginContainer/CenterContainer/Control/Logo:offset_transform_scale")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -169,74 +167,50 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("MarginContainer/CenterContainer/Control/Logo:anchor_bottom")
+tracks/2/path = NodePath("MarginContainer/Buttons:offset_transform_position:y")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0.10000001, 0.5),
-"transitions": PackedFloat32Array(2, 1),
+"times": PackedFloat32Array(0, 0.2, 0.5),
+"transitions": PackedFloat32Array(0.5, 2, 1),
 "update": 0,
-"values": [1.0, 0.0]
+"values": [0.0, -16.0, 48.0]
 }
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("MarginContainer/CenterContainer/Control/Logo:anchor_top")
+tracks/3/path = NodePath("Logo/Node2D/Logo:modulate")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
-"times": PackedFloat32Array(0.10000001, 0.5),
-"transitions": PackedFloat32Array(2, 1),
-"update": 0,
-"values": [0.0, -1.0]
-}
-tracks/4/type = "value"
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/path = NodePath("MarginContainer/CenterContainer/Control/Logo:offset_bottom")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/keys = {
-"times": PackedFloat32Array(0.10000001, 0.5),
-"transitions": PackedFloat32Array(2, 1),
-"update": 0,
-"values": [0.0, -16.0]
-}
-tracks/5/type = "value"
-tracks/5/imported = false
-tracks/5/enabled = true
-tracks/5/path = NodePath("MarginContainer/Buttons/HBoxContainer:offset_bottom")
-tracks/5/interp = 1
-tracks/5/loop_wrap = true
-tracks/5/keys = {
-"times": PackedFloat32Array(0, 0.2, 0.5),
-"transitions": PackedFloat32Array(0.5, 2, 1),
-"update": 0,
-"values": [0.0, -16.0, 32.0]
-}
-tracks/6/type = "value"
-tracks/6/imported = false
-tracks/6/enabled = true
-tracks/6/path = NodePath("MarginContainer/Buttons/HBoxContainer:offset_top")
-tracks/6/interp = 1
-tracks/6/loop_wrap = true
-tracks/6/keys = {
-"times": PackedFloat32Array(0, 0.2, 0.5),
-"transitions": PackedFloat32Array(0.5, 2, 1),
-"update": 0,
-"values": [-32.0, -48.0, 0.0]
-}
-tracks/7/type = "value"
-tracks/7/imported = false
-tracks/7/enabled = true
-tracks/7/path = NodePath("Logo/Node2D/Logo:modulate")
-tracks/7/interp = 1
-tracks/7/loop_wrap = true
-tracks/7/keys = {
 "times": PackedFloat32Array(0, 0.15, 0.35),
 "transitions": PackedFloat32Array(0.5, 2, 1),
 "update": 0,
 "values": [Color(1, 1, 1, 1), Color(1.8247963, 1.8247963, 1.8247963, 1), Color(1, 1, 1, 1)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Gradient:texture:fill_to")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(2, 1),
+"update": 0,
+"values": [Vector2(0, 0.7), Vector2(0, -0.7)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("MarginContainer/CenterContainer/Control/Logo:offset_transform_position_ratio")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0.1, 0.5),
+"transitions": PackedFloat32Array(2, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, -1)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_e5xhn"]
@@ -244,6 +218,18 @@ _data = {
 &"RESET": SubResource("Animation_winya"),
 &"transition": SubResource("Animation_q6idt")
 }
+
+[sub_resource type="Gradient" id="Gradient_x87vx"]
+interpolation_mode = 2
+offsets = PackedFloat32Array(0, 0.5, 1)
+colors = PackedColorArray(0.40167996, 0.052800007, 0.48, 1, 0.64, 0.19839999, 0.57376, 1, 0.4, 0.050980393, 0.47843137, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_dn5jd"]
+gradient = SubResource("Gradient_x87vx")
+width = 128
+height = 128
+fill_to = Vector2(1, 1)
+metadata/_snap_enabled = true
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_winya"]
 shader = ExtResource("4_7r8i1")
@@ -268,7 +254,7 @@ fill_from = Vector2(0.4, 0.3)
 fill_to = Vector2(0.5, 0.7)
 metadata/_snap_enabled = true
 
-[node name="MainMenu" type="Control"]
+[node name="MainMenu" type="Control" unique_id=1142612258]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -278,23 +264,33 @@ grow_vertical = 2
 script = ExtResource("1_q6idt")
 metadata/_custom_type_script = "uid://oem4xeu4v13q"
 
-[node name="ButtonFunctions" type="Control" parent="."]
+[node name="ButtonFunctions" type="Control" parent="." unique_id=533840198]
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 script = ExtResource("2_prid6")
 shop_path = "res://menu/shop/shop.tscn"
 
-[node name="Logo" type="SubViewport" parent="."]
+[node name="Gradient" type="TextureRect" parent="." unique_id=973290360]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("GradientTexture2D_teedc")
+
+[node name="Logo" type="SubViewport" parent="." unique_id=336513341]
 transparent_bg = true
 size_2d_override = Vector2i(128, 128)
 size_2d_override_stretch = true
+script = SubResource("GDScript_prid6")
 
-[node name="Node2D" type="Node2D" parent="Logo"]
+[node name="Node2D" type="Node2D" parent="Logo" unique_id=545075308]
 position = Vector2(12, 4)
 skew = 0.21816616
 
-[node name="Logo" type="VBoxContainer" parent="Logo/Node2D"]
+[node name="Logo" type="VBoxContainer" parent="Logo/Node2D" unique_id=1716108786]
 custom_minimum_size = Vector2(128, 128)
 offset_right = 128.0
 offset_bottom = 128.0
@@ -304,7 +300,7 @@ theme = SubResource("Theme_7r8i1")
 theme_override_constants/separation = -20
 alignment = 1
 
-[node name="U" type="Label" parent="Logo/Node2D/Logo"]
+[node name="U" type="Label" parent="Logo/Node2D/Logo" unique_id=1921873568]
 layout_mode = 2
 size_flags_horizontal = 4
 theme_override_colors/font_color = Color(0.8, 0.19200002, 0.47573337, 1)
@@ -313,7 +309,7 @@ theme_override_constants/outline_size = 12
 theme_override_font_sizes/font_size = 40
 text = "U         "
 
-[node name="plift" type="Label" parent="Logo/Node2D/Logo/U"]
+[node name="plift" type="Label" parent="Logo/Node2D/Logo/U" unique_id=1188373884]
 clip_children = 2
 layout_mode = 1
 offset_left = 2.0
@@ -323,7 +319,7 @@ offset_bottom = 55.333332
 theme_override_font_sizes/font_size = 32
 text = "    plift"
 
-[node name="TextureRect" type="TextureRect" parent="Logo/Node2D/Logo/U/plift"]
+[node name="TextureRect" type="TextureRect" parent="Logo/Node2D/Logo/U/plift" unique_id=1785323523]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -332,7 +328,7 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = SubResource("GradientTexture2D_7r8i1")
 
-[node name="U2" type="Label" parent="Logo/Node2D/Logo/U"]
+[node name="U2" type="Label" parent="Logo/Node2D/Logo/U" unique_id=517087324]
 clip_children = 2
 layout_mode = 0
 offset_left = 2.0
@@ -344,7 +340,7 @@ theme_override_colors/font_outline_color = Color(0.61, 0, 0.2846667, 1)
 theme_override_font_sizes/font_size = 36
 text = "U         "
 
-[node name="TextureRect" type="TextureRect" parent="Logo/Node2D/Logo/U/U2"]
+[node name="TextureRect" type="TextureRect" parent="Logo/Node2D/Logo/U/U2" unique_id=263166489]
 layout_mode = 1
 anchors_preset = -1
 anchor_right = 1.0
@@ -354,7 +350,7 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = SubResource("GradientTexture2D_winya")
 
-[node name="D" type="Label" parent="Logo/Node2D/Logo"]
+[node name="D" type="Label" parent="Logo/Node2D/Logo" unique_id=1691199986]
 layout_mode = 2
 size_flags_horizontal = 4
 theme_override_colors/font_color = Color(0.2666, 0.3259401, 0.86, 1)
@@ -363,7 +359,7 @@ theme_override_constants/outline_size = 12
 theme_override_font_sizes/font_size = 40
 text = "D        "
 
-[node name="rift" type="Label" parent="Logo/Node2D/Logo/D"]
+[node name="rift" type="Label" parent="Logo/Node2D/Logo/D" unique_id=134360985]
 clip_children = 2
 layout_mode = 1
 offset_left = 6.0
@@ -373,7 +369,7 @@ offset_bottom = 55.333332
 theme_override_font_sizes/font_size = 32
 text = "    rift"
 
-[node name="TextureRect" type="TextureRect" parent="Logo/Node2D/Logo/D/rift"]
+[node name="TextureRect" type="TextureRect" parent="Logo/Node2D/Logo/D/rift" unique_id=1506097268]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -382,7 +378,7 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = SubResource("GradientTexture2D_prid6")
 
-[node name="D2" type="Label" parent="Logo/Node2D/Logo/D"]
+[node name="D2" type="Label" parent="Logo/Node2D/Logo/D" unique_id=431724850]
 clip_children = 2
 layout_mode = 0
 offset_left = 2.0
@@ -394,7 +390,7 @@ theme_override_colors/font_outline_color = Color(0, 0.1376668, 0.59, 1)
 theme_override_font_sizes/font_size = 36
 text = "D        "
 
-[node name="TextureRect" type="TextureRect" parent="Logo/Node2D/Logo/D/D2"]
+[node name="TextureRect" type="TextureRect" parent="Logo/Node2D/Logo/D/D2" unique_id=1881679334]
 layout_mode = 1
 anchors_preset = -1
 anchor_right = 1.0
@@ -404,12 +400,10 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = SubResource("GradientTexture2D_winya")
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-libraries = {
-&"": SubResource("AnimationLibrary_e5xhn")
-}
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=514289461]
+libraries/ = SubResource("AnimationLibrary_e5xhn")
 
-[node name="MarginContainer" type="MarginContainer" parent="."]
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=1565499898]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -418,64 +412,59 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/margin_left = 16
 theme_override_constants/margin_top = 8
-theme_override_constants/margin_right = 22
+theme_override_constants/margin_right = 16
 theme_override_constants/margin_bottom = 16
 
-[node name="Buttons" type="Control" parent="MarginContainer"]
+[node name="Buttons" type="HBoxContainer" parent="MarginContainer" unique_id=1204133342]
 layout_mode = 2
-
-[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/Buttons"]
-layout_mode = 1
-anchors_preset = -1
-anchor_top = 1.0
-anchor_bottom = 1.0
-offset_right = 310.0
-offset_bottom = 32.0
-grow_vertical = 0
-scale = Vector2(0.8, 0.8)
-pivot_offset = Vector2(256, 144)
-size_flags_horizontal = 0
 size_flags_vertical = 8
+offset_transform_enabled = true
+offset_transform_pivot_ratio = Vector2(0.5, 1)
 theme_override_constants/separation = 18
 
-[node name="Story" parent="MarginContainer/Buttons/HBoxContainer" instance=ExtResource("2_e5xhn")]
+[node name="Story" parent="MarginContainer/Buttons" unique_id=1526473361 instance=ExtResource("2_e5xhn")]
 custom_minimum_size = Vector2(64, 32)
 layout_mode = 2
-label_text = "Story"
+label_text = "Play!"
 click_intensity = 0.3
 children_scale_intensity = 1.2
 
-[node name="Endless" parent="MarginContainer/Buttons/HBoxContainer" instance=ExtResource("2_e5xhn")]
-custom_minimum_size = Vector2(64, 32)
-layout_mode = 2
-label_text = "Endless"
-click_intensity = 0.3
-children_scale_intensity = 1.2
-
-[node name="Medals" parent="MarginContainer/Buttons/HBoxContainer" instance=ExtResource("2_e5xhn")]
+[node name="Medals" parent="MarginContainer/Buttons" unique_id=1357330498 instance=ExtResource("2_e5xhn")]
+visible = false
 custom_minimum_size = Vector2(64, 32)
 layout_mode = 2
 label_text = "Medals"
 click_intensity = 0.3
 children_scale_intensity = 1.2
 
-[node name="Settings" parent="MarginContainer/Buttons/HBoxContainer" instance=ExtResource("2_e5xhn")]
+[node name="Settings" parent="MarginContainer/Buttons" unique_id=1690926758 instance=ExtResource("2_e5xhn")]
 custom_minimum_size = Vector2(64, 32)
 layout_mode = 2
 label_text = "Settings"
 click_intensity = 0.3
 children_scale_intensity = 1.2
 
-[node name="CenterContainer" type="CenterContainer" parent="MarginContainer"]
+[node name="Padding" type="Control" parent="MarginContainer/Buttons" unique_id=1972503899]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="MoreGames" parent="MarginContainer/Buttons" unique_id=28413273 instance=ExtResource("2_e5xhn")]
+custom_minimum_size = Vector2(104, 32)
+layout_mode = 2
+texture_normal = SubResource("GradientTexture2D_dn5jd")
+label_text = "More Games!"
+color_tint = Color(0.89, 0.56, 1, 1)
+
+[node name="CenterContainer" type="CenterContainer" parent="MarginContainer" unique_id=576408864]
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 0
 
-[node name="Control" type="Control" parent="MarginContainer/CenterContainer"]
+[node name="Control" type="Control" parent="MarginContainer/CenterContainer" unique_id=191243290]
 custom_minimum_size = Vector2(128, 128)
 layout_mode = 2
 
-[node name="Logo" type="TextureRect" parent="MarginContainer/CenterContainer/Control"]
+[node name="Logo" type="TextureRect" parent="MarginContainer/CenterContainer/Control" unique_id=1009785602]
 material = SubResource("ShaderMaterial_winya")
 custom_minimum_size = Vector2(128, 128)
 layout_mode = 1
@@ -485,6 +474,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 pivot_offset = Vector2(0, 192)
+offset_transform_enabled = true
 texture = SubResource("ViewportTexture_prid6")
 expand_mode = 1
 script = ExtResource("5_winya")
@@ -493,7 +483,7 @@ bob_strength = 0.5
 rot_speed = 0.5
 rot_strength = 0.01
 
-[node name="Shadow" type="TextureRect" parent="MarginContainer/CenterContainer/Control/Logo"]
+[node name="Shadow" type="TextureRect" parent="MarginContainer/CenterContainer/Control/Logo" unique_id=358461806]
 modulate = Color(0.025000095, 0, 0.5, 0.2509804)
 show_behind_parent = true
 custom_minimum_size = Vector2(128, 128)
@@ -507,7 +497,7 @@ pivot_offset = Vector2(64, 64)
 texture = SubResource("ViewportTexture_prid6")
 expand_mode = 1
 
-[node name="Outline" type="TextureRect" parent="MarginContainer/CenterContainer/Control/Logo"]
+[node name="Outline" type="TextureRect" parent="MarginContainer/CenterContainer/Control/Logo" unique_id=1804994116]
 show_behind_parent = true
 clip_children = 2
 custom_minimum_size = Vector2(128, 128)
@@ -520,7 +510,7 @@ pivot_offset = Vector2(64, 64)
 texture = SubResource("ViewportTexture_prid6")
 expand_mode = 1
 
-[node name="OutlineGradient" type="TextureRect" parent="MarginContainer/CenterContainer/Control/Logo/Outline"]
+[node name="OutlineGradient" type="TextureRect" parent="MarginContainer/CenterContainer/Control/Logo/Outline" unique_id=2059259034]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -529,8 +519,7 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = SubResource("GradientTexture2D_x87vx")
 
-[connection signal="pressed" from="MarginContainer/Buttons/HBoxContainer/Story" to="ButtonFunctions" method="run_story_mode"]
-[connection signal="pressed" from="MarginContainer/Buttons/HBoxContainer/Story" to="." method="transition" binds= [""]]
-[connection signal="pressed" from="MarginContainer/Buttons/HBoxContainer/Endless" to="." method="transition" binds= [""]]
-[connection signal="pressed" from="MarginContainer/Buttons/HBoxContainer/Medals" to="." method="transition" binds= [""]]
-[connection signal="pressed" from="MarginContainer/Buttons/HBoxContainer/Settings" to="." method="transition" binds= ["Settings"]]
+[connection signal="pressed" from="MarginContainer/Buttons/Story" to="ButtonFunctions" method="run_story_mode"]
+[connection signal="pressed" from="MarginContainer/Buttons/Story" to="." method="transition" binds= [""]]
+[connection signal="pressed" from="MarginContainer/Buttons/Medals" to="." method="transition" binds= [""]]
+[connection signal="pressed" from="MarginContainer/Buttons/Settings" to="." method="transition" binds= ["Settings"]]

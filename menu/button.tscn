@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://8gdwiai7i0gj"]
+[gd_scene format=3 uid="uid://8gdwiai7i0gj"]
 
 [ext_resource type="Shader" uid="uid://cw0wphwhg5eqg" path="res://misc/shaders/bevel.gdshader" id="1_uxjww"]
 [ext_resource type="Script" uid="uid://bncqom6jaso7k" path="res://level/ui/hud/animated_button.gd" id="2_h7v0p"]
@@ -49,7 +49,7 @@ fill_from = Vector2(0.5, 0.4)
 fill_to = Vector2(0.5, 0.6)
 metadata/_snap_enabled = true
 
-[node name="Button" type="TextureButton"]
+[node name="Button" type="TextureButton" unique_id=786432390]
 material = SubResource("ShaderMaterial_kdsbj")
 custom_minimum_size = Vector2(48, 24)
 focus_mode = 0
@@ -69,7 +69,7 @@ click_intensity = 0.15
 children_scale_intensity = 1.1
 animate_speed = 2.0
 
-[node name="Shadow" type="TextureRect" parent="."]
+[node name="Shadow" type="TextureRect" parent="." unique_id=307830472]
 modulate = Color(1, 1, 1, 0.3764706)
 show_behind_parent = true
 layout_mode = 1
@@ -86,7 +86,7 @@ mouse_filter = 2
 texture = SubResource("GradientTexture2D_sui6v")
 expand_mode = 1
 
-[node name="ScrollContainer" type="ScrollContainer" parent="."]
+[node name="ScrollContainer" type="ScrollContainer" parent="." unique_id=1676191830]
 layout_mode = 1
 anchors_preset = -1
 anchor_right = 1.0
@@ -101,7 +101,7 @@ scroll_horizontal_custom_step = 0.001
 horizontal_scroll_mode = 3
 vertical_scroll_mode = 3
 
-[node name="Label" type="Label" parent="ScrollContainer"]
+[node name="Label" type="Label" parent="ScrollContainer" unique_id=603103714]
 clip_children = 1
 layout_mode = 2
 size_flags_horizontal = 3
@@ -112,7 +112,7 @@ text = "Button"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="TextureRect" type="TextureRect" parent="ScrollContainer/Label"]
+[node name="TextureRect" type="TextureRect" parent="ScrollContainer/Label" unique_id=1953986127]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0

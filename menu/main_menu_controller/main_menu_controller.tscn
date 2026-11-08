@@ -1,10 +1,23 @@
-[gd_scene load_steps=4 format=3 uid="uid://41gs0at3fv0t"]
+[gd_scene format=3 uid="uid://41gs0at3fv0t"]
 
+[ext_resource type="Texture2D" uid="uid://dqdkua6yrfvxm" path="res://menu/main_menu_controller/upliftdrift_bg.png" id="1_1slni"]
+[ext_resource type="Shader" uid="uid://2wmf8da3ohwc" path="res://misc/shaders/squigglevision.gdshader" id="1_6m20u"]
 [ext_resource type="Script" uid="uid://cs68siwgb60vw" path="res://menu/screen_manager.gd" id="1_31mi0"]
 [ext_resource type="PackedScene" uid="uid://dlftt0fxvvmkk" path="res://menu/main_menu/main_menu.tscn" id="2_1e71q"]
 [ext_resource type="PackedScene" uid="uid://bxk1oppwws7yo" path="res://menu/settings/settings.tscn" id="3_qj08i"]
 
-[node name="MainMenuController" type="Control"]
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_io750"]
+seamless = true
+seamless_blend_skirt = 1.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_2jugj"]
+shader = ExtResource("1_6m20u")
+shader_parameter/scale = Vector2(1, 0.5)
+shader_parameter/strength = 0.25
+shader_parameter/fps = 3.0
+shader_parameter/noise = SubResource("NoiseTexture2D_io750")
+
+[node name="MainMenuController" type="Control" unique_id=857164217]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -12,7 +25,20 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="ScreenManager" type="Control" parent="." node_paths=PackedStringArray("default_screen")]
+[node name="BG" type="TextureRect" parent="." unique_id=1792866555]
+texture_filter = 2
+material = SubResource("ShaderMaterial_2jugj")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_1slni")
+expand_mode = 1
+stretch_mode = 6
+
+[node name="ScreenManager" type="Control" parent="." unique_id=1336382587 node_paths=PackedStringArray("default_screen")]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -23,8 +49,8 @@ script = ExtResource("1_31mi0")
 default_screen = NodePath("MainMenu")
 metadata/_custom_type_script = "uid://cs68siwgb60vw"
 
-[node name="MainMenu" parent="ScreenManager" instance=ExtResource("2_1e71q")]
+[node name="MainMenu" parent="ScreenManager" unique_id=1272715089 instance=ExtResource("2_1e71q")]
 layout_mode = 1
 
-[node name="Settings" parent="ScreenManager" instance=ExtResource("3_qj08i")]
+[node name="Settings" parent="ScreenManager" unique_id=1903645544 instance=ExtResource("3_qj08i")]
 layout_mode = 1

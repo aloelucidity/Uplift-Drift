@@ -49,14 +49,13 @@ func _init() -> void:
 	time_offset = get_instance_id() * 0.468
 	connect("mouse_entered", mouse_entered)
 	connect("mouse_exited", mouse_exited)
-	connect("resized", resized)
 	connect("pressed", pressed)
 
 
 func _ready() -> void:
 	await get_tree().process_frame
-	initial_position = position
-	resized()
+	offset_transform_enabled = true
+	initial_position = offset_transform_position
 	if label_text != "" and is_instance_valid(label):
 		set_text(label_text)
 
@@ -64,12 +63,6 @@ func _ready() -> void:
 func set_text(text: String) -> void:
 	label.text = text
 	label.visible = (text.length() > 0) ## to fix a clipping issue
-
-
-func resized():
-	pivot_offset = size / 2
-	for child: Control in get_children():
-		child.pivot_offset = child.size / 2
 
 
 func mouse_entered():
@@ -94,10 +87,10 @@ func _process(delta: float) -> void:
 	super(delta)
 	
 	var unix: float = Time.get_unix_time_from_system()
-	position = initial_position
-	position.y += sin(time_offset + unix * float_speed) * float_intensity
-	position.y -= float_offset
-	rotation_degrees = sin(time_offset + unix * rotate_speed) * rotate_intensity
+	offset_transform_position = initial_position
+	offset_transform_position.y += sin(time_offset + unix * float_speed) * float_intensity
+	offset_transform_position.y -= float_offset
+	offset_transform_rotation = deg_to_rad(sin(time_offset + unix * rotate_speed) * rotate_intensity)
 	
 	var modulate_var: String = "self_modulate" if modulate_self else "modulate"
 	self[modulate_var] = lerp(
@@ -113,7 +106,7 @@ func _process(delta: float) -> void:
 	if override_time > 0.0:
 		var override_intensity: float = ease(override_time, click_ease) * click_intensity
 		var override_scale := base_scale + Vector2(override_intensity, override_intensity)
-		scale = override_scale
+		offset_transform_scale = override_scale
 		override_time -= delta * click_decay
 	else:
 		base_scale = lerp(
@@ -121,12 +114,13 @@ func _process(delta: float) -> void:
 			target_scale,
 			delta * scale_speed
 		)
-		scale = base_scale
+		offset_transform_scale = base_scale
 	
 	if not is_equal_approx(children_scale_intensity, 1.0):
 		for child in get_children():
 			if not child is TextureRect and not child is TextureProgressBar:
-				child.scale = Vector2.ONE + (scale - Vector2.ONE) * children_scale_intensity
+				child.offset_transform_enabled = true
+				child.offset_transform_scale = Vector2.ONE + (offset_transform_scale - Vector2.ONE) * children_scale_intensity
 	
 	if is_instance_valid(scroll_container) and scroll_container.size.x < label.size.x and do_scroll:
 			scroll_container.scroll_horizontal += int(delta * 100)
